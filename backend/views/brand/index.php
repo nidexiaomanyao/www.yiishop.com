@@ -1,4 +1,7 @@
-<h1>品牌列表</h1>
+<?php
+
+?>
+    <h1>品牌列表</h1>
     <a href="add" class="btn btn-info">添加</a>
     <a href="display" class="btn btn-danger" style="float: right">回收站</a>
     <table class="table">
@@ -18,7 +21,7 @@
                 <td><?=$brands->intro?></td>
                 <td><?=$brands->sort?></td>
                 <td><?=\backend\models\Brand::$status[$brands->status]?></td>
-                <td><img src="/<?=$brands->logo?>" width="30px"></td>
+                <td><?=\yii\bootstrap\Html::img($brands->image,['height'=>60])?></td>
                 <td><a href="<?=\yii\helpers\Url::to(['brand/edit','id'=>$brands->id]) ?>" class="btn btn-info">编辑</a>
                     <a href="<?=\yii\helpers\Url::to(['brand/huishou','id'=>$brands->id])?>" class="btn btn-danger">回收</a>
             </tr>

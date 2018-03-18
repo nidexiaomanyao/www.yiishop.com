@@ -17,7 +17,7 @@
             <td><?=$displays->intro?></td>
             <td><?=$displays->sort?></td>
             <td><?=\backend\models\Brand::$status[$displays->status]?></td>
-            <td><img src="/<?=$displays->logo?>" width="30px"></td>
+            <td><?=\yii\bootstrap\Html::img($displays->image,['height'=>60])?></td>
             <td><a href="<?=\yii\helpers\Url::to(['brand/reduction','id'=>$displays->id])?>" class="btn btn-info">还原</a>
                 <a href="<?=\yii\helpers\Url::to(['brand/del','id'=>$displays->id])?>" class="glyphicon glyphicon-trash" title="删除"></a>
             </td>

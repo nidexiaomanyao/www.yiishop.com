@@ -13,9 +13,7 @@ use Yii;
  */
 class Brand extends \yii\db\ActiveRecord
 {
-    public  $imgfile;
-    public static $status = ['0' => '隐藏', '1' => '显示'];
-
+    public static $status=['0'=>'隐藏','1'=>'显示'];
     /**
      * @inheritdoc
      */
@@ -23,7 +21,6 @@ class Brand extends \yii\db\ActiveRecord
     {
         return 'brand';
     }
-
     /**
      * @inheritdoc
      */
@@ -32,14 +29,12 @@ class Brand extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['sort', 'status'], 'integer'],
-            [['name'], 'string'],
-            [['intro'], 'string'],
-            [['logo'], 'safe'],
-             [['imgfile'],'image','extensions' => ['gif','jpg','png'],'skipOnEmpty' => true],
-
+            [['name'], 'string', 'max' => 30],
+            [['intro'], 'string', 'max' => 255],
+            // [['imgfile'],'file','extensions' => ['gif','jpg','png'],'skipOnEmpty' => true]
+            [['logo'], 'string', 'max' => 100],
         ];
     }
-
     /**
      * @inheritdoc
      */
@@ -53,5 +48,13 @@ class Brand extends \yii\db\ActiveRecord
             'sort' => '排序',
             'status' => '状态',
         ];
+    }
+    public function getImage()
+    {
+        if (substr($this->logo,0,7)=="http://"){
+            return $this->logo;
+        }else{
+            return "@web/".$this->logo;
+        }
     }
 }

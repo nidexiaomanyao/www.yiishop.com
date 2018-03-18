@@ -1,7 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-echo 111;
+use yii\web\JsExpression;
+use xj\uploadify\Uploadify;
 ?>
 <div class="brand-add">
 
@@ -10,7 +11,7 @@ echo 111;
     <?= $form->field($model, 'name') ?>
     <?= $form->field($model, 'sort') ?>
     <?= $form->field($model, 'status')->radioList(\backend\models\Brand::$status) ?>
-    <?= $form->field($model,'imgfile')->fileInput()?>
+    <?= $form->field($model,'logo')->widget(\manks\FileInput::className(),[]);?>
     <?= $form->field($model, 'intro') ?>
 
     <div class="form-group">
@@ -18,4 +19,4 @@ echo 111;
     </div>
     <?php ActiveForm::end(); ?>
 
-</div><!-- brand-add -->
+</div>
