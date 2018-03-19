@@ -6,6 +6,15 @@ use backend\models\ArticleTetail;
 use yii\helpers\ArrayHelper;
 class ArticleController extends \yii\web\Controller
 {
+    public function actions()
+    {
+        return [
+            'upload' => [
+                'class' => 'kucha\ueditor\UEditorAction',
+            ]
+        ];
+    }
+
     public function actionIndex()
     {
         $article = Article::find()->all();

@@ -37,7 +37,7 @@ class BrandController extends \yii\web\Controller
         //判断是否是POST提交
         if ($model->load($request->post())){
             //创建文件上传对象
-            $model->imgfile=UploadedFile::getInstance($model,'imgfile');
+//            $model->imgfile=UploadedFile::getInstance($model,'imgfile');
             //拼装路径
             //$path="images/brand/".uniqid().".".$model->imgfile->extension;
             //保存图片
@@ -119,7 +119,7 @@ class BrandController extends \yii\web\Controller
         $ok=[
             'code'=>0,
             'url'=>$url,
-            "attachmont"=>$url
+            "attachment"=>$url
 
         ];
         return json_encode($ok);
