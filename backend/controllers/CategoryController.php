@@ -4,15 +4,15 @@ namespace backend\controllers;
 
 use backend\models\Category;
 use yii\data\ActiveDataProvider;
+use yii\db\Exception;
 use yii\helpers\Json;
 
 class CategoryController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        $categorys=Category::find()->all();
-
-        return $this->render('index',['categorys'=>$categorys]);
+        $cates=Category::find()->orderBy('tree,lft')->all();
+        return $this->render('index',compact('cates'));
     }
 
     /**
@@ -69,23 +69,30 @@ class CategoryController extends \yii\web\Controller
         if ($request->isPost){
             $cate->load($request->post());
             if ($cate->validate()){
-                //添加一级分了
-                if ($cate->parent_id==0){
-                    $cate->makeRoot();
-                    //厂家成功
-                    \Yii::$app->session->setFlash("success","修改一级分类:".$cate->name.":成功");
-                    //刷新不跳转
-                    return $this->refresh();
-                }else{
-                    //子类
-                    $cateparent= Category::findOne($cate->parent_id);
+                try{
+                    if ($cate->parent_id==0){
+                        $cate->save();
+                        //厂家成功
+                        \Yii::$app->session->setFlash("success","修改一级分类:".$cate->name.":成功");
+                        //刷新不跳转
+                        return $this->refresh();
+                    }else{
+                        //子类
+                        $cateparent= Category::findOne($cate->parent_id);
 
-                    $cate->prependTo($cateparent);
-                    \Yii::$app->session->setFlash("success","修改{$cateparent->name}分类的子分类:".$cate->name.":成功");
-                    //刷新不跳转
-                    return $this->refresh();
+                        $cate->prependTo($cateparent);
+                        \Yii::$app->session->setFlash("success","修改{$cateparent->name}分类的子分类:".$cate->name.":成功");
+                        //刷新不跳转
+                        return $this->redirect(['index']);
 
+                    }
                 }
+
+                catch (Exception $exception){
+                \Yii::$app->session->setFlash("danger","不能移动到子节点");
+                }
+                //添加一级分了
+
             }
         }
         return $this->render('add',compact('cate','catesjson'));

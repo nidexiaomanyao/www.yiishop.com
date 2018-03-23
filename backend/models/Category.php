@@ -74,5 +74,9 @@ class Category extends \yii\db\ActiveRecord
     public function getChildren(){
         return $this->hasMany(self::className(),['parent_id'=>'id']);
     }
+    public function getNameText(){
+
+        return  str_repeat("-",$this->depth*4).$this->name;
+    }
 
 }

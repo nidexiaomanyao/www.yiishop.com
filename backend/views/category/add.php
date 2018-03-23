@@ -20,6 +20,25 @@ echo \liyuze\ztree\ZTree::widget([
 echo $form->field($cate,'intro')->textarea();
 echo \yii\bootstrap\Html::submitButton("提交",['class'=>'btn btn-success']);
 \yii\bootstrap\ActiveForm::end();
+
+$js=<<<js
+var treeObj = $.fn.zTree.getZTreeObj("w1");
+
+//得到当前阶段
+var node=treeObj.getNodeByParam("id","$cate->parent_id",null);
+//选中当前节点
+treeObj.selectNode(node);
+$("#category-parent_id").val($cate->parent_id);
+
+//展开方法
+treeObj.expandAll(true);
+/*选中当前节点*/
+var node = treeObj.getNodeByParam("id","{$cate->parent_id}",null);
+treeObj.selectNode(node);
+js;
+//注册JS代码
+$this->registerJs($js);
+
 ?>
 <script>
 
