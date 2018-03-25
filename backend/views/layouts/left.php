@@ -75,35 +75,33 @@
                             ['label' => '添加分类', 'icon' => 'dashboard', 'url' => ['/article-category/add'],],
                         ],
                     ],
-                    ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
-                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
-                        'label' => 'Some tools',
+                        'label' => '管理员',
                         'icon' => 'share',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug'],],
-                            [
-                                'label' => 'Level One',
-                                'icon' => 'circle-o',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Level Two', 'icon' => 'circle-o', 'url' => '#',],
-                                    [
-                                        'label' => 'Level Two',
-                                        'icon' => 'circle-o',
-                                        'url' => '#',
-                                        'items' => [
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                        ],
-                                    ],
-                                ],
-                            ],
+                            ['label' => '管理员', 'icon' => 'file-code-o', 'url' => ['/admin/index'],],
+                            ['label' => '添加管理', 'icon' => 'dashboard', 'url' => ['/admin/add'],],
+                        ],
+                    ],[
+                        'label' => '权限管理',
+                        'icon' => 'share',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => '管理权限', 'icon' => 'file-code-o', 'url' => ['/permission/index'],],
+                            ['label' => '添加管理', 'icon' => 'dashboard', 'url' => ['/permission/add'],],
                         ],
                     ],
+                    [
+                        'label' => '角色管理',
+                        'icon' => 'share',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => '角色列表', 'icon' => 'file-code-o', 'url' => ['/role/index'],],
+                            ['label' => '添加角色', 'icon' => 'dashboard', 'url' => ['/role/add'],],
+                        ],
+                    ],
+
                 ],
 
             ]
